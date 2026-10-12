@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="An interactive playground to learn data structures and algorithms through visual examples.">
+  <title>DSA Lab — Learn by doing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="header">
+    <a class="logo" href="#"><span class="logo-icon">◈</span><span>DSA<span class="logo-accent">LAB</span></span></a>
+    <nav id="navLinks"><a href="#visualizer">Visualizer</a><a href="#structures">Data structures</a><a
+        href="#learn">Learn</a></nav>
+    <a class="header-cta" href="#visualizer">Start experimenting <span>↗</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> INTERACTIVE DSA PLAYGROUND</div>
+        <h1>Make algorithms<br><em>make sense.</em></h1>
+        <p>A hands-on space to see how algorithms move, compare, search, and solve problems. Change the inputs. Run the
+          steps. Learn the why.</p>
+        <div class="hero-buttons"><a class="btn btn-dark" href="#visualizer">Open the lab <span>↘</span></a><a
+            class="under-link" href="#structures">Explore structures <span>↓</span></a></div>
+        <div class="hero-note"><span class="note-check">✓</span><span><b>No setup required.</b> Runs directly in your
+            browser.</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Abstract sorting visualization">
+        <div class="visual-top"><span class="window-dots"><i></i><i></i><i></i></span><span>sort_process.js</span><span
+            class="running"><i></i> READY</span></div>
+        <div class="visual-code"><span class="code-purple">function</span> <span class="code-blue">sort</span>(items)
+          {<br><span class="indent"></span><span class="code-purple">for</span> (let i = 0; i &lt; items.length; i++)
+          {<br><span class="indent two"></span><span class="code-orange">compare</span>(items[i], items[i +
+          1]);<br><span class="indent two"></span><span class="code-green">swapIfNeeded</span>();<br><span
+            class="indent"></span>}<br><span class="indent"></span><span class="code-purple">return</span> items;<br>}
+        </div>
+        <div class="mini-bars"><i style="height:25%"></i><i style="height:47%"></i><i style="height:34%"></i><i
+            style="height:70%"></i><i style="height:55%"></i><i style="height:92%"></i><i style="height:63%"></i><i
+            style="height:42%"></i><i style="height:82%"></i><i style="height:32%"></i></div>
+        <div class="visual-footer"><span><b>01</b> compare</span><span><b>02</b> swap</span><span><b>03</b>
+            repeat</span><span class="visual-spark">✳</span></div>
+        <div class="floating-tag tag-one">O(n log n)</div>
+        <div class="floating-tag tag-two">step by step ↗</div>
+      </div>
+      <div class="hero-bottom">
+        <div><b>04</b><span>Sorting algorithms</span></div>
+        <div><b>02</b><span>Search methods</span></div>
+        <div><b>03</b><span>Structure playgrounds</span></div>
+        <div class="hero-bottom-note">SMALL STEPS. STRONG FOUNDATIONS.</div>
+      </div>
+    </section>
+
+    <section class="section lab-section" id="visualizer">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">01 / ALGORITHM VISUALIZER</div>
+          <h2>Watch the logic unfold.</h2>
+        </div>
+        <p>Pick an algorithm, change the array, and run it.<br>Colors show what the algorithm is doing.</p>
+      </div>
+      <div class="lab-shell">
+        <div class="lab-controls">
+          <div class="control-group"><label for="algorithm">ALGORITHM</label><select id="algorithm">
+              <option value="bubble">Bubble sort</option>
+              <option value="selection">Selection sort</option>
+              <option value="insertion">Insertion sort</option>
+              <option value="quick">Quick sort</option>
+            </select></div>
+          <div class="control-group"><label for="arrayInput">ARRAY VALUES (comma-separated)</label><input
+              id="arrayInput" value="42, 18, 35, 7, 29, 50, 12, 24" maxlength="180"></div>
+          <div class="control-row"><button class="btn btn-coral" id="applyArray">Apply array</button><button
+              class="btn btn-outline" id="randomArray">↻ Randomize</button></div>
+          <div class="control-group"><label for="speed">ANIMATION SPEED <span
+                id="speedLabel">Medium</span></label><input id="speed" type="range" min="1" max="5" value="3"></div>
+          <div class="run-buttons"><button class="btn btn-dark" id="runSort">▶ Run sort</button><button
+              class="btn btn-outline" id="stepSort">Step →</button><button class="btn btn-outline"
+              id="resetSort">Reset</button></div>
+          <div class="algorithm-info"><span class="info-icon">i</span>
+            <div><b id="algoName">Bubble sort</b>
+              <p id="algoDescription">Repeatedly compares adjacent values and swaps them if they are in the wrong order.
+              </p>
+              <div class="complexity-row"><span>Average time</span><b id="algoComplexity">O(n²)</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="lab-stage">
+          <div class="stage-top">
+            <div><span class="stage-dot"></span><b>LIVE CANVAS</b></div><span id="runStatus">Ready to run</span>
+          </div>
+          <div class="bar-chart" id="barChart" aria-label="Sorting bar chart"></div>
+          <div class="legend"><span><i class="legend-default"></i>Unsorted</span><span><i
+                class="legend-compare"></i>Comparing</span><span><i class="legend-swap"></i>Swap / insert</span><span><i
+                class="legend-done"></i>Sorted</span></div>
+          <div class="metrics">
+            <div><span>COMPARISONS</span><b id="comparisons">0</b></div>
+            <div><span>SWAPS / WRITES</span><b id="swaps">0</b></div>
+            <div><span>ARRAY SIZE</span><b id="arraySize">8</b></div>
+          </div>
+          <div class="step-log">
+            <div class="log-head"><b>STEP LOG</b><span id="stepCount">0 steps</span></div>
+            <div id="logEntries">
+              <p class="log-empty">Run or step through an algorithm to see what happens here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section search-section">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">02 / SEARCH PLAYGROUND</div>
+          <h2>Find it faster.</h2>
+        </div>
+        <p>Compare linear search with binary search.<br>Binary search requires sorted data.</p>
+      </div>
+      <div class="search-playground">
+        <div class="search-controls">
+          <div class="control-group"><label for="searchArray">ARRAY</label><input id="searchArray"
+              value="4, 8, 13, 19, 26, 31, 45, 52"></div>
+          <div class="control-row">
+            <div class="control-group"><label for="targetValue">TARGET</label><input id="targetValue" type="number"
+                value="31"></div>
+            <div class="control-group"><label for="searchMethod">METHOD</label><select id="searchMethod">
+                <option value="linear">Linear search</option>
+                <option value="binary">Binary search</option>
+              </select></div>
+          </div><button class="btn btn-dark full-btn" id="runSearch">Search for target ↗</button>
+          <p class="mini-help" id="searchHelp">Linear search checks each item from left to right.</p>
+        </div>
+        <div class="search-stage">
+          <div class="search-status" id="searchStatus">Ready when you are.</div>
+          <div class="search-items" id="searchItems"></div>
+          <div class="search-result" id="searchResult">Enter a target and run the search.</div>
+          <div class="search-stats"><span>ITEMS CHECKED <b id="checkedCount">0</b></span><span>RESULT INDEX <b
+                id="foundIndex">—</b></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="structures">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">03 / DATA STRUCTURE PLAYGROUND</div>
+          <h2>Try the structures yourself.</h2>
+        </div>
+        <p>Perform real operations and watch the structure<br>change as you work.</p>
+      </div>
+      <div class="structure-layout">
+        <div class="structure-tabs" role="tablist" aria-label="Data structure">
+          <button class="structure-tab active" data-structure="stack" role="tab" aria-selected="true"><span>▤</span>
+            Stack</button>
+          <button class="structure-tab" data-structure="queue" role="tab" aria-selected="false"><span>⇥</span>
+            Queue</button>
+          <button class="structure-tab" data-structure="linked" role="tab" aria-selected="false"><span>↔</span> Linked
+            list</button>
+        </div>
+        <div class="structure-workspace">
+          <div class="structure-title">
+            <div><span class="structure-symbol" id="structureSymbol">▤</span>
+              <div>
+                <h3 id="structureName">Stack</h3>
+                <p id="structureDefinition">Last In, First Out (LIFO)</p>
+              </div>
+            </div><span class="complexity-pill" id="structureComplexity">Push / pop O(1)</span>
+          </div>
+          <div class="structure-visual" id="structureVisual"></div>
+          <div class="structure-actions">
+            <div class="control-group"><label for="structureValue" id="structureInputLabel">VALUE TO PUSH</label><input
+                id="structureValue" placeholder="Enter a value" maxlength="24" value="42"></div><button
+              class="btn btn-coral" id="insertStructure">Push value</button><button class="btn btn-outline"
+              id="removeStructure">Pop</button><button class="btn btn-outline" id="clearStructure">Clear</button>
+          </div>
+          <div class="structure-message" id="structureMessage" aria-live="polite">Ready. Add a value to get started.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section learn-section" id="learn">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">04 / QUICK NOTES</div>
+          <h2>Know the basics.</h2>
+        </div>
+        <p>Short explanations to help you connect<br>the visual behavior to the concept.</p>
+      </div>
+      <div class="learn-grid">
+        <article class="learn-card"><span class="learn-number">01</span><span class="learn-icon">↕</span>
+          <h3>Time complexity</h3>
+          <p>How an algorithm's running time grows as the input gets larger. It helps compare approaches beyond one test
+            run.</p>
+          <div class="learn-footer"><span>O(1) · O(log n) · O(n) · O(n²)</span></div>
+        </article>
+        <article class="learn-card"><span class="learn-number">02</span><span class="learn-icon">▦</span>
+          <h3>Data structures</h3>
+          <p>Ways to organize data so operations such as lookup, insertion, deletion, and traversal are convenient.</p>
+          <div class="learn-footer"><span>Arrays · stacks · queues · trees</span></div>
+        </article>
+        <article class="learn-card"><span class="learn-number">03</span><span class="learn-icon">⚖</span>
+          <h3>Trade-offs</h3>
+          <p>One choice can be faster but use more memory. The right choice depends on the operations your app performs
+            most.</p>
+          <div class="learn-footer"><span>Speed · memory · simplicity</span></div>
+        </article>
+      </div>
+    </section>
+    <section class="closing">
+      <div><span class="eyebrow">KEEP EXPERIMENTING</span>
+        <h2>Understand it.<br><em>Then build it.</em></h2>
+      </div><a class="btn btn-dark" href="#visualizer">Back to the lab ↑</a>
+    </section>
+  </main>
+  <footer><a class="logo" href="#"><span class="logo-icon">◈</span><span>DSA<span
+          class="logo-accent">LAB</span></span></a>
+    <p>Learn algorithms by seeing them in action.</p><span>MADE FOR CURIOUS MINDS · 2026</span>
+  </footer>
+  <script src="script.js"></script>
+</body>
+
+</html>
